@@ -41,6 +41,7 @@ public class MaterialTabHost extends RelativeLayout implements View.OnClickListe
     private boolean isTablet;
     private float density;
     private boolean scrollable;
+    private int rippleColor;
 
     private HorizontalScrollView scrollView;
     private LinearLayout layout;
@@ -76,6 +77,7 @@ public class MaterialTabHost extends RelativeLayout implements View.OnClickListe
 
                 primaryColor = a.getColor(R.styleable.MaterialTabHost_materialTabsPrimaryColor, Color.parseColor("#009688"));
                 accentColor = a.getColor(R.styleable.MaterialTabHost_accentColor,Color.parseColor("#00b0ff"));
+                            rippleColor = a.getColor(R.styleable.MaterialTabHost_accentRippleColor,Color.parseColor("#ffffff"));
                 iconColor = a.getColor(R.styleable.MaterialTabHost_iconColor,Color.WHITE);
                 textColor = a.getColor(R.styleable.MaterialTabHost_textColor,Color.WHITE);
 			} finally {
@@ -108,15 +110,23 @@ public class MaterialTabHost extends RelativeLayout implements View.OnClickListe
 			tab.setPrimaryColor(color);
 		}
 	}
-	
-	public void setAccentColor(int color) {
+
+    public void setRippleColor(int color) {
+        this.rippleColor = color;
+
+        for(MaterialTab tab : tabs) {
+            tab.setRippleColor(color);
+        }
+    }
+
+    public void setAccentColor(int color) {
 		this.accentColor = color;
 		
 		for(MaterialTab tab : tabs) {
 			tab.setAccentColor(color);
 		}
 	}
-	
+
 	public void setTextColor(int color) {
 		this.textColor = color;
 		
@@ -136,6 +146,7 @@ public class MaterialTabHost extends RelativeLayout implements View.OnClickListe
 	public void addTab(MaterialTab tab) {
         // add properties to tab
         tab.setAccentColor(accentColor);
+            tab.setRippleColor(rippleColor);
         tab.setPrimaryColor(primaryColor);
         tab.setTextColor(textColor);
         tab.setIconColor(iconColor);

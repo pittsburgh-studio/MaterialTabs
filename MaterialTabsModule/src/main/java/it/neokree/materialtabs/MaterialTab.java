@@ -44,6 +44,7 @@ public class MaterialTab implements View.OnTouchListener {
 	private int iconColor;
 	private int primaryColor;
 	private int accentColor;
+    private int rippleColor;
 
 	private boolean active;
 	private int position;
@@ -101,7 +102,11 @@ public class MaterialTab implements View.OnTouchListener {
         this.textColor = color;
         this.iconColor = color;
 	}
-	
+
+    public void setRippleColor(int color) {
+        this.rippleColor = color;
+    }
+
 	public void setPrimaryColor(int color) {
 		this.primaryColor = color;
 
@@ -212,7 +217,8 @@ public class MaterialTab implements View.OnTouchListener {
             }
             else {
                 // set the backgroundcolor
-                this.background.reveal(lastTouchedPoint.x, lastTouchedPoint.y, Color.argb(0x80, Color.red(accentColor), Color.green(accentColor), Color.blue(accentColor)), 0, REVEAL_DURATION, new Animator.AnimatorListener() {
+                this.background.reveal(lastTouchedPoint.x, lastTouchedPoint.y, Color.argb(0x80, Color.red(rippleColor), Color.green(rippleColor), Color.blue(rippleColor)) ,0, REVEAL_DURATION, new Animator.AnimatorListener() {
+//                this.background.reveal(lastTouchedPoint.x, lastTouchedPoint.y, Color.argb(0x80, Color.red(accentColor), Color.green(accentColor), Color.blue(accentColor)), 0, REVEAL_DURATION, new Animator.AnimatorListener() {
                     @Override
                     public void onAnimationStart(Animator animation) {
                     }
